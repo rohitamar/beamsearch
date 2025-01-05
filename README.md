@@ -2,8 +2,18 @@
 
 Comparing different sampling techniques on N-grams, NPLM, LSTMs, and Transformers.  
 
+## Number of Parameters and Hyperparameters
 
-Transformer output:
+Here’s a simple Markdown table displaying the data:
+
+| **Model**      | **Number of Parameters**  |
+|----------------|------------|
+| Transformer    | 1132993    |
+| RNN            | 41665      |
+| NPLM           | 319545     |
+
+## Outputs
+Transformer
 ```
  more.
 Cannot the Citizen:
@@ -20,7 +30,7 @@ Have this fight, to me gracious son:
 And sick, and the maste
 ```
 
-RNN output:
+RNN
 ```
  hood war me;
 You clound and to lader.
@@ -37,7 +47,7 @@ And course proved onror, as the gared everble bricking sties than be have Tyseng
 And some wrong of presence some tu
 ```
 
-NPLM output: (context: ``Then? and I crown, with land is it so``)
+NPLM (context: ``Then? and I crown, with land is it so``)
 ```
 Then? and I crown, with land is it sounta? 
 Ondhf'd, so dey of oir of it'oun nane agn boad, and hocast,
