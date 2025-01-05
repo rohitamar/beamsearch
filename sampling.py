@@ -25,7 +25,7 @@ def random_decode(model, init_tokens, steps, block_size, temperature=1.0):
     model.eval()
     decoded_tokens = init_tokens[:]
     for _ in range(steps):
-        x = decoded_tokens[-block_size+1:]
+        x = decoded_tokens[-block_size:]
         x = torch.tensor([x], dtype=torch.long, device=device)
         with torch.no_grad():
             logits = model(x)
@@ -38,6 +38,63 @@ def random_decode(model, init_tokens, steps, block_size, temperature=1.0):
         decoded_tokens.append(next_token_id)
 
     return decoded_tokens
+
+def sample_topk(model, init_tokens, steps, block_size, k):
+    model.eval()
+    decoded_tokens = init_tokens[:]
+    for _ in range(steps):
+        x = decoded_tokens[-block_size:]
+        x = torch.tensor([x], dtype=torch.long, device=device)
+        with torch.no_grad():
+            logits = model(x)
+        # necessary for NPLM vs. RNN/Transformer decoding
+        logits = logits[0]
+        if logits.dim() == 2:
+            logits = logits[-1]
+
+        _, topk_indices = torch.topk(logits, k)
+        mask = torch.ones_like(logits, dtype=torch.bool)
+        mask[topk_indices] = False
+        logits[mask] = float('-inf')
+
+        probs = F.softmax(logits, dim = -1)
+        next_token_id = torch.multinomial(probs, 1).item()
+        decoded_tokens.append(next_token_id)
+    
+    return decoded_tokens
+
+def sample_nucleus(model, init_tokens, steps, block_size, p):
+    model.eval()
+    decoded_tokens = init_tokens[:]
+    for _ in range(steps):
+        x = decoded_tokens[-block_size:]
+        x = torch.tensor([x], dtype=torch.long, device=device)
+        with torch.no_grad():
+            logits = model(x)
+            
+        # necessary for NPLM vs. RNN/Transformer decoding
+        logits = logits[0]
+        if logits.dim() == 2:
+            logits = logits[-1]
+        
+        sorted_logits, sorted_indices = torch.sort(logits, descending = True)
+        cum_probs = torch.cumsum(F.softmax(sorted_logits, dim = -1), dim = -1)
+
+        ind = torch.searchsorted(cum_probs, p)
+        mask = torch.ones_like(sorted_logits, dtype=torch.bool)
+        mask[ind + 1:] = False
+
+        top_p_indices = sorted_indices[mask] 
+        mask_in_original_order = torch.ones_like(logits, dtype=torch.bool)
+        mask_in_original_order[top_p_indices] = False
+        logits[mask_in_original_order] = -float('Inf')
+        
+        probs = F.softmax(logits, dim=-1)
+        next_token_id = torch.multinomial(probs, num_samples=1).item()
+        decoded_tokens.append(next_token_id)
+    
+    return decoded_tokens
+
 
 class BeamCandidate():
         def __init__(self, tokens, log_prob):
