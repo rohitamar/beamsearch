@@ -66,5 +66,6 @@ class TransformerModel(nn.Module):
         x = self.position(x)
         x = self.encoder(x, mask)
         x = self.decoder(x)
-
+        x = torch.log_softmax(x, dim = -1)
+        
         return x
