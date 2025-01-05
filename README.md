@@ -5,99 +5,49 @@ Comparing different sampling techniques on N-grams, NPLM, LSTMs, and Transformer
 
 Transformer output:
 ```
- your life!--dead good such his him,
-Wife burnorh inocence and most take him a place: consents
-My good king father without men: and they have usurp not from worth
-With your methought to false thee best.
+ more.
+Cannot the Citizen:
+What come, dock's heart; not care too your son Edward's pain.
 
-COMINIUS:
-No droped brother, I sway it.
+KING RICHARD III:
+Death, yet up, and that I dear still nor than comes!
 
-MENENIUS:
-Thereof-mother, my lord.
+First Servingman:
+Why had, and farewell; then I  would steep him.
 
-HASTINGS:
-This is to your booky in the world.
-
-GREGORY:
-My throt which worthy mother.
-
-KING RICHARD II:
-Hark the day smoody.
-
-KING EDWARD IV:
-Go, and very heel, and not old is I times to devy,
-That thou forget-call'd roe in my assure guarl dishonour'd.
-
-KING RICHARD II:
-Go.
-
-JULIET:
-'Tis noble Romeo!
-I'll dear be put the beauty;--Scould well thereof pronound with son,
-To that I being like all tyrant with for straight
+GLOUCESTER:
+Have this fight, to me gracious son:
+And sick, and the maste
 ```
 
 RNN output:
 ```
- talings Marets ate and ip bith,
-The up we name the couch Romy, whourse tarient
-Worldsot uaring not to shengegure,
-And woyie myess yourse of tobe bleRow's sith preast old bubes,
-Tin thou sto grear's your qulycevine ined?
+ hood war me;
+You clound and to lader.
 
-QUEEN:
-Wall insspay, my ving kink deinious bloI
-Velle thee op, is dead.
-
-Seh, bod to hackerim, Dombles hems a have sprep to that reace,
-The bofer.
-Hers me a thes hereut?
-
-BENETGRBEY LIANGS:
-ATilus det thee vignt tones!
-Whigh but:
-What that
-ais ho loke a with coo in the promes,
-Oy gly and tleade,
-And with bbrineas plank amy ale.
-
-QURUTEET:
-ir other,
-Thal.
-
-CORICHARD INIUS:
-Chagling but my Ffreelace needed to mane to my prome.
-
-Cofry, bust that hom ruch hiventer lize the erme?
-```
-
-NPLM output: (context: ``your life!--dead good such his him,\nWife``)
-```
-your life!--dead good such his him,
-Wife and was uppay, there we nant thy baine.
-Come to ghare sir gouysten!
-You, I will fourthan he
-Hade frim there lil. 
-FRIAR MyNe, O and ole rancy him srefvery?
-
-DUKI Go the bursbe; my word it, broon of whild diny.
-
-MERCHING:
-Aw I'llok woil.
-
-COMINIUS:
-Nous thit's: avis, pead you arouf curporr ss otet,
-By was dign'dly frased; my nowso him 'le ale nothonownom, gonthat, puted I guethene'll,
-foo bomistmfrostland draves
-To layf ob'cins.
+BUCKID:
+Me, a pack his chipts and behin both to.
 
 KING EDWARD IV:
-The eyel'd, gaidy, ot
-The ruants than and fair.' O, on thout ath theu herthis dutes;
-Romethe thy beike wellore core my ilear
-Recand to mrebjes mitald?
-Geds upwend amaly war hond, beto
-Booul sankd. That he ting, ste she?
-Aptooy, shall it norto by gie.
+Gook now shatt.
+O well.
+Seeds
+A deaked no hour. I have days,
+And course proved onror, as the gared everble bricking sties than be have Tyseng chand shalt soums;
+And some wrong of presence some tu
+```
+
+NPLM output: (context: ``Then? and I crown, with land is it so``)
+```
+Then? and I crown, with land is it sounta? 
+Ondhf'd, so dey of oir of it'oun nane agn boad, and hocast,
+We cakell the gignne
+SEspald to meland wour outhse?-is fole to hatcaon.
+
+HORBIUBOLIO:
+Atlo dowe that haut ary acers;
+Teta sold Ruclafoft wo holl with hed mreak! will twh,
+Thiss the quick both rick,
+And batiche lorn you pad inince!
+Th
 ```
