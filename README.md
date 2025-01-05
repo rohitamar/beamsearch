@@ -38,6 +38,40 @@ I'll dear be put the beauty;--Scould well thereof pronound with son,
 To that I being like all tyrant with for straight
 ```
 
+RNN output:
+```
+ talings Marets ate and ip bith,
+The up we name the couch Romy, whourse tarient
+Worldsot uaring not to shengegure,
+And woyie myess yourse of tobe bleRow's sith preast old bubes,
+Tin thou sto grear's your qulycevine ined?
+
+QUEEN:
+Wall insspay, my ving kink deinious bloI
+Velle thee op, is dead.
+
+Seh, bod to hackerim, Dombles hems a have sprep to that reace,
+The bofer.
+Hers me a thes hereut?
+
+BENETGRBEY LIANGS:
+ATilus det thee vignt tones!
+Whigh but:
+What that
+ais ho loke a with coo in the promes,
+Oy gly and tleade,
+And with bbrineas plank amy ale.
+
+QURUTEET:
+ir other,
+Thal.
+
+CORICHARD INIUS:
+Chagling but my Ffreelace needed to mane to my prome.
+
+Cofry, bust that hom ruch hiventer lize the erme?
+```
+
 NPLM output: (context: ``your life!--dead good such his him,\nWife``)
 ```
 your life!--dead good such his him,
