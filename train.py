@@ -37,7 +37,7 @@ def get_batch(block_size, batch_size, split = "train"):
     return x.to(device), y.to(device)
 
 # assumes that scheduler being used is ReduceLROnPlateau (if used) 
-def train_loop(model, criterion, schedule, device, configs):
+def train_loop(model, criterion, schedule, configs):
 
     block_size = configs['block_size']
     batch_size = configs['batch_size']
@@ -86,7 +86,67 @@ def train_loop(model, criterion, schedule, device, configs):
                 tl = tl / 200
                 test_loss.append(tl)
 
-                if scheduler:
+                if schedule:
+                    scheduler.step(tl)
+                
+                print(f"Step [{i}] Train: {train_loss[-1]} Val: {val_loss[-1]} Test: {test_loss[-1]}")
+    
+    return {
+        "train": train_loss,
+        "val": val_loss,
+        "test": test_loss
+    }
+
+def train_loop_nplm(model, criterion, schedule, configs):
+
+    block_size = configs['block_size']
+    batch_size = configs['batch_size']
+    steps = configs['steps']
+    eval = configs['eval']
+    test_every = configs['test_every']
+    init_lr = configs['init_lr']
+
+    model = model.to(device)
+    optimizer = optim.Adam(model.parameters(), lr = init_lr)
+    if schedule:
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=5)
+
+    train_loss, val_loss, test_loss = [], [], []
+
+    def get_loss(split):
+        x, _ = get_batch(block_size, batch_size, split)
+        preds = model(x[:, :-1])
+        target = x[:, -1]
+
+
+        loss = criterion(preds, target)
+        return loss
+
+    for i in range(steps):
+        loss = get_loss("train")
+        train_loss.append(loss.item())
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        if i % test_every == 0:
+            with torch.no_grad():
+                vl = 0.0
+                for _ in range(eval):
+                    loss = get_loss("val")
+                    vl += loss.item()
+                vl = vl / 200
+                val_loss.append(vl)
+
+                tl = 0.0
+                for _ in range(eval):
+                    loss = get_loss("test")
+                    tl += loss.item()
+                tl = tl / 200
+                test_loss.append(tl)
+
+                if schedule:
                     scheduler.step(tl)
                 
                 print(f"Step [{i}] Train: {train_loss[-1]} Val: {val_loss[-1]} Test: {test_loss[-1]}")
@@ -99,39 +159,64 @@ def train_loop(model, criterion, schedule, device, configs):
 
 from models import NPLM, RNN, TransformerModel
 
-rnn_model = RNN(vocab_size, 64, 64).to(device)
-transformer_model = TransformerModel(vocab_size, d_model=64).to(device)
-nplm_model = NPLM(vocab_size, 64, 64, 32).to(device)
+rnn_model = RNN(vocab_size=vocab_size, 
+                embed_size=64, 
+                hidden_size=64
+            ).to(device)
 
 rnn_loss = train_loop(
     rnn_model, 
     nn.CrossEntropyLoss(), 
-    None,
-    device, 
-     {
-         "block_size": 32, 
-         "batch_size": 16, 
-         "steps": 30000, 
-         "eval": 200, 
-         "test_every": 1000,
-         "init_lr": 1e-3
+    False, 
+    {
+        "block_size": 32, 
+        "batch_size": 16, 
+        "steps": 30000, 
+        "eval": 200, 
+        "test_every": 1000,
+        "init_lr": 1e-3
     }
 )
+
+transformer_model = TransformerModel(
+                        vocab_size=vocab_size, 
+                        d_model=64
+                    ).to(device)
 
 transformer_loss = train_loop(
     transformer_model, 
     nn.NLLLoss(), 
-    True,
-    device, 
-     {
-         "block_size": 32, 
-         "batch_size": 32, 
-         "steps": 30000, 
-         "eval": 200, 
-         "test_every": 1000,
-         "init_lr": 1e-3
+    True, 
+    {
+        "block_size": 32, 
+        "batch_size": 32, 
+        "steps": 30000, 
+        "eval": 200, 
+        "test_every": 1000,
+        "init_lr": 1e-3
+    }
+)
+
+nplm_model = NPLM(vocab_size=vocab_size, 
+                  embed_size=64, 
+                  hidden_size=64, 
+                  block_size=32
+             ).to(device)
+
+nlpm_loss = train_loop_nplm(
+    nplm_model, 
+    nn.CrossEntropyLoss(),
+    False,
+    {
+        "block_size": 32, 
+        "batch_size": 32, 
+        "steps": 30000, 
+        "eval": 200, 
+        "test_every": 1000,
+        "init_lr": 1e-3
     }
 )
 
 torch.save(rnn_model.state_dict(), "./saved_models/rnn.pt")
 torch.save(transformer_model.state_dict(), "./saved_models/transformer.pt")
+torch.save(nplm_model.state_dict(), "./saved_models/nplm.pt")
