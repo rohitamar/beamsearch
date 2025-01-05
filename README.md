@@ -5,71 +5,36 @@ Comparing different sampling techniques on N-grams, NPLM, LSTMs, and Transformer
 
 Transformer output:
 ```
- your life!--dead good such his him,
-Wife burnorh inocence and most take him a place: consents
-My good king father without men: and they have usurp not from worth
-With your methought to false thee best.
+ more.
+Cannot the Citizen:
+What come, dock's heart; not care too your son Edward's pain.
 
-COMINIUS:
-No droped brother, I sway it.
+KING RICHARD III:
+Death, yet up, and that I dear still nor than comes!
 
-MENENIUS:
-Thereof-mother, my lord.
+First Servingman:
+Why had, and farewell; then I  would steep him.
 
-HASTINGS:
-This is to your booky in the world.
-
-GREGORY:
-My throt which worthy mother.
-
-KING RICHARD II:
-Hark the day smoody.
-
-KING EDWARD IV:
-Go, and very heel, and not old is I times to devy,
-That thou forget-call'd roe in my assure guarl dishonour'd.
-
-KING RICHARD II:
-Go.
-
-JULIET:
-'Tis noble Romeo!
-I'll dear be put the beauty;--Scould well thereof pronound with son,
-To that I being like all tyrant with for straight
+GLOUCESTER:
+Have this fight, to me gracious son:
+And sick, and the maste
 ```
 
 RNN output:
 ```
- talings Marets ate and ip bith,
-The up we name the couch Romy, whourse tarient
-Worldsot uaring not to shengegure,
-And woyie myess yourse of tobe bleRow's sith preast old bubes,
-Tin thou sto grear's your qulycevine ined?
+ hood war me;
+You clound and to lader.
 
-QUEEN:
-Wall insspay, my ving kink deinious bloI
-Velle thee op, is dead.
+BUCKID:
+Me, a pack his chipts and behin both to.
 
-Seh, bod to hackerim, Dombles hems a have sprep to that reace,
-The bofer.
-Hers me a thes hereut?
-
-BENETGRBEY LIANGS:
-ATilus det thee vignt tones!
-Whigh but:
-What that
-ais ho loke a with coo in the promes,
-Oy gly and tleade,
-And with bbrineas plank amy ale.
-
-QURUTEET:
-ir other,
-Thal.
-
-CORICHARD INIUS:
-Chagling but my Ffreelace needed to mane to my prome.
-
-Cofry, bust that hom ruch hiventer lize the erme?
+KING EDWARD IV:
+Gook now shatt.
+O well.
+Seeds
+A deaked no hour. I have days,
+And course proved onror, as the gared everble bricking sties than be have Tyseng chand shalt soums;
+And some wrong of presence some tu
 ```
 
 NPLM output: (context: ``your life!--dead good such his him,\nWife``)
