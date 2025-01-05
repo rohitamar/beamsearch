@@ -38,7 +38,7 @@ I'll dear be put the beauty;--Scould well thereof pronound with son,
 To that I being like all tyrant with for straight
 ```
 
-NPLM output: (context: ``your life!--dead good such his him,\nWife``
+NPLM output: (context: ``your life!--dead good such his him,\nWife``)
 ```
 your life!--dead good such his him,
 Wife and was uppay, there we nant thy baine.
