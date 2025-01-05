@@ -12,6 +12,8 @@ Here’s a simple Markdown table displaying the data:
 | RNN            | 41665      |
 | NPLM           | 319545     |
 
+All models were trained on a block_size of 32, batch_size of 32, learning_rate of 1e-3, and 30,000 steps. For the NPLM, I used a hidden layer of size 300. For the RNN, I used a hidden layer of size 64. For the Transformer, I used n_layers = 4, d_model = 64, n_head = 4 and dropout of 0.1. 
+
 ## Outputs
 Transformer
 ```
