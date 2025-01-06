@@ -1,6 +1,6 @@
 # Sampling different models
 
-Comparing different sampling techniques on N-grams, NPLM, LSTMs, and Transformers. Loosely based on [https://github.com/karpathy/nanoGPT](this).
+Comparing different sampling techniques on N-grams, NPLM, LSTMs, and Transformers. Loosely based on [this](https://github.com/karpathy/nanoGPT).
 
 ## Number of Parameters and Hyperparameters
 
