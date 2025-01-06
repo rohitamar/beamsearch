@@ -21,7 +21,7 @@ print(nplm_model)
 
 from sampling import greedy_decode, random_decode, beam_search
 
-with open('/content/drive/MyDrive/datasets/shakespeare/data.txt') as f:
+with open('./dataset/data.txt') as f:
     data = f.read()
     vocab = sorted(set(data))
     ctoi = {x:i for i, x in enumerate(vocab)}
