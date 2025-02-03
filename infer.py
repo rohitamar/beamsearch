@@ -1,9 +1,33 @@
 import torch 
 import torch.nn as nn
 
-rnn_model = torch.load("./saved_models/rnn_model.pt")
-transformer_model = torch.load("./saved_models/transformer_model.pt")
-nplm_model = torch.load("./saved_models/nplm_model.pt")
+from models import NPLM, RNN, TransformerModel
+
+with open('./dataset/data.txt') as f:
+    data = f.read()
+    vocab = sorted(set(data))
+    ctoi = {x:i for i, x in enumerate(vocab)}
+    itoc = {i:x for i, x in enumerate(vocab)}
+    vocab_size = len(vocab)
+
+rnn_model = RNN(vocab_size=vocab_size, 
+                embed_size=64, 
+                hidden_size=64
+            ).to(device)
+rnn_model.load_state_dict(torch.load("./saved_models/rnn_model.pt"))
+
+transformer_model = TransformerModel(
+                        vocab_size=vocab_size, 
+                        d_model=64
+                    ).to(device)
+transformer_model.load_state_dict(torch.load("./saved_models/transformer_model.pt"))
+
+nplm_model = NPLM(vocab_size=vocab_size, 
+                  embed_size=64, 
+                  hidden_size=64, 
+                  block_size=32
+             ).to(device)
+nplm_model.load_state_dict(torch.load("./saved_models/nplm_model.pt"))
 
 def num_parameters(model):
     total = 0
